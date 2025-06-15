@@ -46,6 +46,10 @@ def scrape_and_populate():
             image_url = BASE_URL + img_src
         else:
             image_url = img_src
+        # Remove /d50x50 from the end for high quality image
+        if image_url.endswith('/d50x50'):
+            image_url = image_url[:-7]  # Remove last 8 characters
+            print(image_url)
         # Remove duplicate if exists
         if not Staff.query.filter_by(name=name).first():
             staff = Staff(name=name, role=role, profile_url=profile_url, image_url=image_url)
