@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Goats - Staff Directory</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container py-5">
+        <h1 class="mb-4 text-center text-primary fw-bold">Research Goats</h1>
+        <div class="row g-4">
+            {% for s in staff %}
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="glass-card p-4 text-center position-relative">
+                    <h5 class="fw-bold">{{ s.name }}</h5>
+                    <p class="text-secondary mb-2">{{ s.role }}</p>
+                    <a href="#" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal{{ s.id }}">View Profile</a>
+                </div>
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="modal{{ s.id }}" tabindex="-1" aria-labelledby="modalLabel{{ s.id }}" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content glass-modal">
+                  <div class="modal-header border-0">
+                    <h5 class="modal-title" id="modalLabel{{ s.id }}">{{ s.name }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body text-center">
+                    <img src="{{ s.image_url }}" alt="{{ s.name }}" class="rounded mb-3 staff-img">
+                    <p class="mb-1"><strong>Role:</strong> {{ s.role }}</p>
+                    <a href="{{ s.profile_url }}" class="btn btn-primary mt-2" target="_blank">Open Full Profile</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
